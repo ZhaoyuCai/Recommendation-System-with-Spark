@@ -49,7 +49,7 @@ val UMpair = lines.map(line => parse(line)).filter(x => x.rating>3).map(x =>(x.u
 val MUpair = lines.map(line => parse(line)).filter(x => x.rating>3).map(x =>(x.movie,x.user)).groupByKey().mapValues(_.toList).sortByKey()
 
 //Initialization
-var Similarity = UMpair.mapValues(v => 0.0).sortByKey()
+var Similarity = UMpair.mapValues(v => 0.0).sortByKey() // Double type
 val temp = 1.0/MUpair.count
 var Relevance = MUpair.mapValues(v => temp).sortByKey()
 
