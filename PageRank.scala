@@ -37,15 +37,9 @@ def parse(line: String) = {
 	MatchData(user, movie, rating) 
 } 
 
-def norating(x: MatchData) = {
-	val user = x.user
-	val movie = x.movie
-	UMpair(user,movie)
-} //eliminate attribute rating
-
 val UMpair = lines.map(line => parse(line)).filter(x => x.rating>3).map(x =>(x.user,x.movie)).groupByKey().mapValues(_.toList).sortByKey()
 val MUpair = lines.map(line => parse(line)).filter(x => x.rating>3).map(x =>(x.movie,x.user)).groupByKey().mapValues(_.toList).sortByKey()
-
+                                                                    //eliminate attribute rating
 val users_j = Array(1,10,15,20,100) //choose users
 var user_j = 0
 
