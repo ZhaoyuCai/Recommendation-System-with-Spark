@@ -46,7 +46,6 @@ def norating(x: MatchData) = {
 val UMpair = lines.map(line => parse(line)).filter(x => x.rating>3).map(x =>(x.user,x.movie)).groupByKey().mapValues(_.toList).sortByKey()
 val MUpair = lines.map(line => parse(line)).filter(x => x.rating>3).map(x =>(x.movie,x.user)).groupByKey().mapValues(_.toList).sortByKey()
 
-user_j = 1 //change to a specific user for recommendation
 val users_j = Array(1,10,15,20,100) //choose users
 var user_j = 0
 
