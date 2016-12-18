@@ -21,6 +21,12 @@
   */
 
 sc
+val text = sc.textFile("hdfs://master:9000/rating/ratings.csv")
+
+//remove header
+def isHeader(line: String): Boolean = { line.contains("userId") }
+val lines = text.filter(x => !isHeader(x))
+
 val lines = sc.textFile("hdfs://master:9000/rating/ratings.csv")
 lines.cache()
 lines.take(10).foreach(println) //check the data
@@ -43,7 +49,7 @@ val MUpair = lines.map(line => parse(line)).filter(x => x.rating>3).map(x =>(x.m
 val users_j = Array(1,10,15,20,100) //choose users
 var user_j = 0
 
-for (j <- 0 to 5){
+for (j <- 0 to 4){
 	//Initialization
 	var Similarity = UMpair.mapValues(v => 0.0).sortByKey() //Pair(userId,0.0)
 	val temp = 1.0/MUpair.count
